@@ -3,13 +3,13 @@
 <!-- config.xml reference: https://build.phonegap.com/docs/config-xml -->
 <widget xmlns     = "http://www.w3.org/ns/widgets"
         xmlns:gap = "http://phonegap.com/ns/1.0"
-        id        = "com.businesssolutionapps.mreppharma"
-        version   = "1.5.0">
+        id        = "com.businesssolutionapps.mrepfmcg30"
+        version   = "3.0.0">
 
-    <name>mReporting Pharma</name>
+    <name>FMCG-30</name>
 
     <description>
-        mReporting Pharma
+       FMCG-30
     </description>
 
     <author href="http://phonegap.com" email="sabbir456@gmail.com">
