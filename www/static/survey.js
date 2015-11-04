@@ -326,6 +326,8 @@ function check_user() {
 	//var  apipath_base_photo_dm='http://127.0.0.1:8000/mrepskf/syncmobile_ofline_ppm_report_test_live_20150502/dmpath?CID='+cid +'&HTTPPASS=e99business321cba'
 	
 	//var apipath_base_photo_dm='http://e2.businesssolutionapps.com/mrepbiopharma/syncmobile_ofline_ppm_report_test/dmpath?CID='+cid +'&HTTPPASS=e99business321cba'
+ 
+ 
   var apipath_base_photo_dm ='http://e2.businesssolutionapps.com/welcome/dmpath_live_20150502/get_path?CID='+cid +'&HTTPPASS=e99business321cba'
 	
 	
@@ -5581,6 +5583,10 @@ function s_order_detail_report() {
 	$("#rep_detail").html("");
 	
 	
+	
+	
+	
+	
 	// ajax-------
 	//$("#myerror_s_report").html(localStorage.base_url+'s_call_order_detail?cid='+localStorage.cid+'&rep_id='+localStorage.user_id+'&rep_pass='+localStorage.user_pass+'&synccode='+localStorage.synccode+'&rep_id_report='+localStorage.rep_id_report_doc+'&se_item_report='+localStorage.se_item_report_doc+'&se_market_report='+localStorage.se_market_report_doc+'&date_from='+localStorage.date_from_doc+'&date_to='+localStorage.date_to_doc+'&user_type='+localStorage.user_type);
 	// ajax-------
@@ -5642,6 +5648,39 @@ function s_order_detail_report() {
 function set_report_parameter_doctor() {	
 	var date_from_doc=$("#date_from_doc").val();
 	var date_to_doc=$("#date_to_doc").val();
+	
+	
+	var month_from=$("#month_from").val();
+	var month_to=$("#month_to").val();
+	//alert (month_from);
+	
+	
+	var day_from=$("#day_from").val();
+	var day_to=$("#day_to").val();
+	//alert (month_from.length);
+	if (month_from.length==1){
+		month_from='0'+month_from
+	}
+	if (month_to.length==1){
+		month_to='0'+month_to
+	}
+	if (day_from.length==1){
+		day_from='0'+day_from
+	}
+	if (day_to.length==1){
+		day_to='0'+day_to
+	}
+	
+	
+	var d = new Date();
+    var Year = d.getFullYear();
+	
+	date_from_doc=Year+'-'+month_from+'-'+day_from
+	date_to_doc=Year+'-'+month_to+'-'+day_to
+	
+	//alert (date_from_doc);
+	
+	
 	var rep_id_report_doc=$("#se_mpo_doc").val();
 	var se_item_report_doc=$("#se_item_doc").val();
 	var se_market_report_doc=$("#se_market_doc").val();
