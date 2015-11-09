@@ -322,8 +322,8 @@ function check_user() {
 	
 	//Main
 
-	//var  apipath_base_photo_dm='http://127.0.0.1:8000/mrepgh/syncmobile_order_to_delivery_gh/dmpath?CID='+cid +'&HTTPPASS=e99business321cba'
-	//var  apipath_base_photo_dm='http://127.0.0.1:8000/mrepskf/syncmobile_ofline_ppm_report_test_live_20150502/dmpath?CID='+cid +'&HTTPPASS=e99business321cba'
+//	var  apipath_base_photo_dm='http://127.0.0.1:8000/mrepgh/syncmobile_order_to_delivery_gh/dmpath?CID='+cid +'&HTTPPASS=e99business321cba'
+	
 	
 	//var apipath_base_photo_dm='http://e2.businesssolutionapps.com/mrepbiopharma/syncmobile_ofline_ppm_report_test/dmpath?CID='+cid +'&HTTPPASS=e99business321cba'
  
@@ -4724,10 +4724,16 @@ function reports() {
 	var rep_combo='<select id="se_mpo_doc" width="60%" >';
 	var repStr_report =localStorage.repStr_report
 	var repStrArray=repStr_report.split('<rd>')
+	var start_flag=0
 	for (var r=0; r<repStrArray.length; r++){
 		rep_single=repStrArray[r].split('<fd>')
-		//alert (rep_single[0]);
-        rep_combo=rep_combo+'<option style="width:60%; overflow:scroll" value="'+rep_single[0]+'" >'+rep_single[0]+' | '+rep_single[1]+'</option>'
+		if (start_flag==0){
+        	rep_combo=rep_combo+'<option selected="selected"	style="width:60%; overflow:scroll" value="'+rep_single[0]+'" >'+rep_single[0]+' | '+rep_single[1]+'</option>'
+			start_flag=1;
+		}
+		else{
+			rep_combo=rep_combo+'<option style="width:60%; overflow:scroll" value="'+rep_single[0]+'" >'+rep_single[0]+' | '+rep_single[1]+'</option>'
+		}
 	}
 	rep_combo=rep_combo+'</select>';
 	 
@@ -5646,7 +5652,7 @@ function s_order_detail_report() {
 	
 	
 	// ajax-------
-	//$("#myerror_s_report").html(localStorage.base_url+'s_call_order_detail?cid='+localStorage.cid+'&rep_id='+localStorage.user_id+'&rep_pass='+localStorage.user_pass+'&synccode='+localStorage.synccode+'&rep_id_report='+localStorage.rep_id_report_doc+'&se_item_report='+localStorage.se_item_report_doc+'&se_market_report='+localStorage.se_market_report_doc+'&date_from='+localStorage.date_from_doc+'&date_to='+localStorage.date_to_doc+'&user_type='+localStorage.user_type);
+	$("#myerror_s_report").html(localStorage.base_url+'s_call_order_detail?cid='+localStorage.cid+'&rep_id='+localStorage.user_id+'&rep_pass='+localStorage.user_pass+'&synccode='+localStorage.synccode+'&rep_id_report='+localStorage.rep_id_report_doc+'&se_item_report='+localStorage.se_item_report_doc+'&se_market_report='+localStorage.se_market_report_doc+'&date_from='+localStorage.date_from_doc+'&date_to='+localStorage.date_to_doc+'&user_type='+localStorage.user_type);
 	// ajax-------
 			$.ajax({
 				 type: 'POST',
