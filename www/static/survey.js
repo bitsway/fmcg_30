@@ -562,6 +562,8 @@ function check_user() {
 													localStorage.delivery_date_flag=resultArray[20];
 													localStorage.payment_date_flag=resultArray[21];
 													localStorage.payment_mode_flag=resultArray[22];
+													
+													localStorage.repStr_report=resultArray[23];
 													//alert (localStorage.delivery_date);
 
 												
@@ -4705,22 +4707,67 @@ function feedback() {
 	$.mobile.navigate(url);
 }
 function reports() {
-	var str_report_rep='<table width="100%" border="0">'+
-					 '<tr><td>Rep: </td><td><input id="se_mpo_doc" name="se_mpo_doc" type="text" readonly="true" placeholder="Rep">'+
-					  '<input id="se_item_doc" name="se_item_doc" type="hidden" placeholder="Item"></td></tr>'+
-					   '<tr><td>Market: </td><td><input id="se_market_doc" name="se_market_doc" type="text" placeholder="Market"  ></td></tr></table>'
-	var str_report_sup='<table width="100%" border="0">'+
-					   '<tr><td>Rep: </td><td><input id="se_mpo_doc" name="se_mpo_doc" type="text" placeholder="Rep">'+
-					   '<input id="se_item_doc" name="se_item_doc" type="hidden" placeholder="Item"></td></tr>	'+
-					   '<tr><td>Market: </td><td><input id="se_market_doc" name="se_market_doc" type="text" placeholder="Market/level"  ></td></tr></table>'	
+	
+	//alert (localStorage.marketListStr);
+	var market_combo='<select id="se_market_doc" width="60%" ><option style="width:60%; overflow:scroll" value="All" >All</option>';
+	var marketListStr =localStorage.marketListStr
+	var marketArray=marketListStr.split('<rd>')
+	for (var p=0; p<marketArray.length; p++){
+		market_single=marketArray[p].split('<fd>')
+		//alert (market_single);
+        market_combo=market_combo+'<option style="width:60%; overflow:scroll" value="'+market_single[0]+'" >'+market_single[0]+' | '+market_single	[1]+'</option>'
+	}
+	market_combo=market_combo+'</select>';
+	
+	
+	
+	var rep_combo='<select id="se_mpo_doc" width="60%" >';
+	var repStr_report =localStorage.repStr_report
+	var repStrArray=repStr_report.split('<rd>')
+	for (var r=0; r<repStrArray.length; r++){
+		rep_single=repStrArray[r].split('<fd>')
+		//alert (rep_single[0]);
+        rep_combo=rep_combo+'<option style="width:60%; overflow:scroll" value="'+rep_single[0]+'" >'+rep_single[0]+' | '+rep_single[1]+'</option>'
+	}
+	rep_combo=rep_combo+'</select>';
+	 
+		var str_report_rep='Rep:</br>'+rep_combo+
+						   '</br>Market: </br><input id="se_item_doc" name="se_item_doc" type="hidden" placeholder="Item">'+market_combo
+		var str_report_sup='Rep: </br>'+rep_combo+
+					   '</br>Market: </br><input id="se_item_doc" name="se_item_doc" type="hidden" placeholder="Item">'+market_combo
+	
+					   
+	//var str_report_rep='<table width="100%" border="0">'+
+//					 '<tr><td>Rep: </td><td><input id="se_mpo_doc" name="se_mpo_doc" type="text" readonly="true" placeholder="Rep">'+
+//					  '<input id="se_item_doc" name="se_item_doc" type="hidden" placeholder="Item"></td></tr>'+
+//					   '<tr><td>Market: </td><td>'+market_combo+ '</td></tr></table>'	
+					   
+					   
+					//   <input id="se_market_doc" name="se_market_doc" type="text" placeholder="Market"  ></td></tr></table>'
+//	var str_report_sup='<table width="100%" border="0">'+
+					  // '<tr><td>Rep: </td><td><input id="se_mpo_doc" name="se_mpo_doc" type="text" placeholder="Rep">'+
+//					   '<input id="se_item_doc" name="se_item_doc" type="hidden" placeholder="Item"></td></tr>	'+
+//					   '<tr><td>Market: </td><td>'+market_combo+ '</td></tr></table>'	
+					 //  '<input id="se_market_doc" name="se_market_doc" type="text" placeholder="Market/level"  >'+
+					  
+	
+	
+	
+	
+	
 	
 	if (localStorage.user_type=='rep'){
+		$('#date_rep_from').html('From');
+		$('#rep_to_date').show();
 		localStorage.str_report=str_report_rep;
 		$('#report').empty();
 		$('#report').append(localStorage.str_report).trigger('create');
 		$('#se_mpo_doc').val(localStorage.user_id);
 	}
 	if (localStorage.user_type=='sup'){
+		$('#date_rep_from').html('Date');
+		
+		$('#rep_to_date').hide();
 		localStorage.str_report=str_report_sup;
 		$('#report').empty();
 		$('#report').append(localStorage.str_report).trigger('create');
@@ -5570,8 +5617,19 @@ function s_order_summary_report() {
 function s_order_detail_report() {	
 	//set_report_parameter();
 	set_report_parameter_doctor();
+	
 	localStorage.date_to_doc=localStorage.date_from_doc;
-	$("#date_f").html("Date :"+date_from_show_doc);
+	if (localStorage.user_type=='sup'){
+		$("#date_f").html("Date :" +localStorage.date_from_doc);
+		
+	}
+	else{
+		$("#date_f").html("DateFrom :" +localStorage.date_from_doc+"</br>DateTo :" +localStorage.date_to_doc);
+		
+		
+	}
+	
+	//alert (localStorage.date_from_doc);
 	$("#date_t").html("");
 	
 	
@@ -5651,12 +5709,23 @@ function set_report_parameter_doctor() {
 	
 	
 	var month_from=$("#month_from").val();
-	var month_to=$("#month_to").val();
+	var month_to=month_from;
 	//alert (month_from);
-	
+	if  (localStorage.user_type=='rep'){
+		month_to=$("#month_to").val();
+	}
 	
 	var day_from=$("#day_from").val();
-	var day_to=$("#day_to").val();
+	var day_to=day_from;
+	if  (localStorage.user_type=='rep'){
+		day_to=$("#day_to").val();
+	}
+	
+	
+	
+	
+	
+	
 	//alert (month_from.length);
 	if (month_from.length==1){
 		month_from='0'+month_from
@@ -5672,14 +5741,25 @@ function set_report_parameter_doctor() {
 	}
 	
 	
+	
 	var d = new Date();
     var Year = d.getFullYear();
+	var Month = d.getMonth();
+	//alert (d);
+	if (parseInt(month_from) > parseInt(Month)+1){
+		Year=parseInt(Year)-1;
+	}
+	
+	//alert (month_from);
+	
+	//alert (Year);
 	
 	date_from_doc=Year+'-'+month_from+'-'+day_from
 	date_to_doc=Year+'-'+month_to+'-'+day_to
 	
 	//alert (date_from_doc);
-	
+	var date_from_show_doc=date_from_doc;
+	var date_to_show_doc=date_to_doc;
 	
 	var rep_id_report_doc=$("#se_mpo_doc").val();
 	var se_item_report_doc=$("#se_item_doc").val();
@@ -5690,23 +5770,24 @@ function set_report_parameter_doctor() {
 	}
 	
 	
+	//alert (rep_id_report_doc);
 	se_item_report="All"
 	
-	if (date_from_doc.length==0){
-		date_from_show_doc="Today"
-	}
-	else{
-		date_from_show_doc=date_from_doc
-	}
-	if (date_to_doc.length==0){
-		date_to_show_doc="Today"
-	}
-	else{
-		date_to_show_doc=date_to_doc
-	}
+	//if (date_from_doc.length==0){
+//		date_from_show_doc="Today"
+//	}
+//	else{
+//		date_from_show_doc=date_from_doc
+//	}
+//	if (date_to_doc.length==0){
+//		date_to_show_doc="Today"
+//	}
+//	else{
+//		date_to_show_doc=date_to_doc
+//	}
 	//alert (se_item_report);
 	
-	if (rep_id_report_doc.length==0){
+	if (rep_id_report_doc==null ){
 		rep_id_report_doc=localStorage.user_id;
 	}
 	
@@ -5719,10 +5800,11 @@ function set_report_parameter_doctor() {
 	
 	$("#report_market_doctor").html("Market :"+localStorage.se_market_report_doc);
 	$("#report_mpo_doctor").html("MPO :"+localStorage.rep_id_report_doc);
+	
 	$("#date_f_doctor").html("DateFrom :"+date_from_show_doc);
 	$("#date_t_doctor").html("DateTo :"+date_to_show_doc);
 	
-	
+	//alert (date_from_show_doc);
 	
 	$("#report_market").html("Market :"+localStorage.se_market_report_doc);
 	$("#report_mpo").html("MPO :"+localStorage.rep_id_report_doc);

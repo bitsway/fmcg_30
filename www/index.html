@@ -136,7 +136,7 @@ function MM_jumpMenu(targ,selObj,restore){ //v3.0
                 				
 				<div id="ret_cat">
 				 <select id="catCombo" width="60%" data-native-menu="false">
-                <option value="" >Category</option>
+                <option  value="" >Category</option>
                 </select>
 				</div>
                 <input id="unschedule_market_combo_id" data-type="search"  placeholder="Search">
@@ -1290,14 +1290,13 @@ function MM_jumpMenu(targ,selObj,restore){ //v3.0
 				<div id="myerror" style="color:#C00"></div>               
                               
 					<div id="report"> </div>
-					
-					<table width="100%" border="0">
-					  <tr>
-						<td>From &nbsp;</td>
-						<td>
+<span id="date_rep_from">From  </span></br>
 <table width="100%" border="0">
   <tr>
+    
+    
     <td  width="70%" >
+	
 					<select name="month_from" id="month_from" >
 					  <option value="1">January</option>
 					  <option value="2">February</option>
@@ -1313,7 +1312,7 @@ function MM_jumpMenu(targ,selObj,restore){ //v3.0
 					  <option value="12">December</option>
 					</select>
 	</td>
-    <td>
+		<td>
 					<select name="day_from" id="day_from" >
 					  <option value="1">1</option>
 					  <option value="2">2</option>
@@ -1347,20 +1346,14 @@ function MM_jumpMenu(targ,selObj,restore){ //v3.0
 					  <option value="30">30</option>
 					  <option value="31">31</option>
 					</select>
-							</td>
+			  </td>
   </tr>
 </table>
 
 						    
-                        
-						<!--<input id="date_from_doc" name="date_from_doc" type="date" data-role="date"  >--></td>
-					  </tr>	
+<div id="rep_to_date" >                       
 					
-					
-					  <tr>
-						<td>To </td>
-						<td>
-						
+To </br>					
 <table width="100%" border="0">
   <tr>
     <td  width="70%" >
@@ -1419,10 +1412,7 @@ function MM_jumpMenu(targ,selObj,restore){ //v3.0
   </tr>
 </table>
 						
-						
-						<!--<input id="date_to_doc" name="date_to_doc" type="date" data-role="date" >--></td>
-					  </tr>
-					</table>
+</div>						
 
 				<br/>
 				<div id="doctor_report_button"> </div>
@@ -1467,7 +1457,7 @@ function MM_jumpMenu(targ,selObj,restore){ //v3.0
 								<td><div id="date_f"> </div></td>
 							 </tr>
 							  <tr>	
-								<td> <div id="date_t">  </div></td>
+								<td> <div id="date_t"></div></td>
 							 </tr>
 							</table>
 						
