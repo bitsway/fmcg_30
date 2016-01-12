@@ -2846,16 +2846,13 @@ function reports() {
 	rpt_rep_ob.selectedIndex = 0;	
 	
 	//--------------------------
-	if (localStorage.user_type=='rep'){
+	/*if (localStorage.user_type=='rep'){
 		$('#rpt_date_from').html('From');
-		$('#rpt_date_from').show();
-		//localStorage.str_report=str_report_rep;
-		
+		$('#rpt_date_to').show();		
 	}else if (localStorage.user_type=='sup'){
 		$('#rpt_date_from').html('Date');		
-		$('#rpt_date_to').hide();		
-		//localStorage.str_report=str_report_sup;		
-	}
+		$('#rpt_date_to').hide();
+	}*/
 	
 	var url = "#page_reports";
 	$.mobile.navigate(url);
@@ -2908,13 +2905,13 @@ function order_detail_report() {
 					$("#error_rpt").html('Sorry Network not available');
 					$("#order_report_button").show();
 					$("#wait_image_rpt").hide();
-				}else{					
-					var resultArray = result.split('<SYNCDATA>');			
-					if (resultArray[0]=='FAILED'){						
-						$("#error_rpt").html(resultArray[1]);								
+				}else{
+					var resultArray = result.split('<SYNCDATA>');
+					if (resultArray[0]=='FAILED'){
+						$("#error_rpt").html(resultArray[1]);
 						$("#order_report_button").show();
 						$("#wait_image_rpt").hide();
-					}else if (resultArray[0]=='SUCCESS'){						
+					}else if (resultArray[0]=='SUCCESS'){
 						var market_string=resultArray[1];
 						var rep_string=resultArray[2];
 						var fromDate_string=resultArray[3];
@@ -2925,12 +2922,13 @@ function order_detail_report() {
 						$("#show_rpt_market").html("Market &nbsp;&nbsp;&nbsp;&nbsp;:"+market_string);
 						$("#show_rpt_rep").html("Rep &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:"+rep_string);
 						
-						if (localStorage.user_type=='sup'){
+						/*if (localStorage.user_type=='sup'){
 							$("#show_rpt_date").html("Date &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:" +fromDate_string);
-						}
-						else{
+						}else{
 							$("#show_rpt_date").html("DateFrom:" +fromDate_string+"</br>DateTo &nbsp;&nbsp;&nbsp;&nbsp;:" +toDate_string);
-						}
+						}*/
+						
+						$("#show_rpt_date").html("DateFrom:" +fromDate_string+"</br>DateTo &nbsp;&nbsp;&nbsp;&nbsp;:" +toDate_string);
 						
 						$("#report_header").html('Order Details Report');
 						
@@ -3031,12 +3029,13 @@ function order_summary_report() {
 						$("#show_rpt_market").html("Market &nbsp;&nbsp;&nbsp;&nbsp;:"+market_string);
 						$("#show_rpt_rep").html("Rep &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:"+rep_string);
 						
-						if (localStorage.user_type=='sup'){
+						/*if (localStorage.user_type=='sup'){
 							$("#show_rpt_date").html("Date &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:" +fromDate_string);
-						}
-						else{
+						}else{
 							$("#show_rpt_date").html("DateFrom:" +fromDate_string+"</br>DateTo &nbsp;&nbsp;&nbsp;&nbsp;:" +toDate_string);
-						}
+						}*/
+						
+						$("#show_rpt_date").html("DateFrom:" +fromDate_string+"</br>DateTo &nbsp;&nbsp;&nbsp;&nbsp;:" +toDate_string);
 						
 						$("#report_header").html("Order Summary Report");
 						
@@ -3137,12 +3136,12 @@ function segment_wise_report() {
 						$("#show_rpt_market").html("Market &nbsp;&nbsp;&nbsp;&nbsp;:"+market_string);
 						$("#show_rpt_rep").html("Rep &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:"+rep_string);
 						
-						if (localStorage.user_type=='sup'){
+						/*if (localStorage.user_type=='sup'){
 							$("#show_rpt_date").html("Date &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:" +fromDate_string);
-						}
-						else{
+						}else{
 							$("#show_rpt_date").html("DateFrom:" +fromDate_string+"</br>DateTo &nbsp;&nbsp;&nbsp;&nbsp;:" +toDate_string);
-						}
+						}*/
+						$("#show_rpt_date").html("DateFrom:" +fromDate_string+"</br>DateTo &nbsp;&nbsp;&nbsp;&nbsp;:" +toDate_string);
 						
 						$("#report_header").html("Segment Wise Report");
 						
@@ -3227,7 +3226,7 @@ function sku_wise_report() {
 					$("#error_rpt").html('Sorry Network not available');
 					$("#order_report_button").show();
 					$("#wait_image_rpt").hide();
-				}else{					
+				}else{
 					var resultArray = result.split('<SYNCDATA>');			
 					if (resultArray[0]=='FAILED'){						
 						$("#error_rpt").html(resultArray[1]);								
@@ -3244,12 +3243,13 @@ function sku_wise_report() {
 						$("#show_rpt_market").html("Market &nbsp;&nbsp;&nbsp;&nbsp;:"+market_string);
 						$("#show_rpt_rep").html("Rep &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:"+rep_string);
 						
-						if (localStorage.user_type=='sup'){
+						/*if (localStorage.user_type=='sup'){
 							$("#show_rpt_date").html("Date &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:" +fromDate_string);
 						}
 						else{
 							$("#show_rpt_date").html("DateFrom:" +fromDate_string+"</br>DateTo &nbsp;&nbsp;&nbsp;&nbsp;:" +toDate_string);
-						}
+						}*/
+						$("#show_rpt_date").html("DateFrom:" +fromDate_string+"</br>DateTo &nbsp;&nbsp;&nbsp;&nbsp;:" +toDate_string);
 						
 						$("#report_header").html("SKU Wise Report");
 						
@@ -3350,12 +3350,12 @@ function freezer_efficiency_report() {
 						$("#show_rpt_market").html("Market &nbsp;&nbsp;&nbsp;&nbsp;:"+market_string);
 						$("#show_rpt_rep").html("Rep &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:"+rep_string);
 						
-						if (localStorage.user_type=='sup'){
+						/*if (localStorage.user_type=='sup'){
 							$("#show_rpt_date").html("Date &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:" +fromDate_string);
-						}
-						else{
+						}else{
 							$("#show_rpt_date").html("DateFrom:" +fromDate_string+"</br>DateTo &nbsp;&nbsp;&nbsp;&nbsp;:" +toDate_string);
-						}
+						}*/
+						$("#show_rpt_date").html("DateFrom:" +fromDate_string+"</br>DateTo &nbsp;&nbsp;&nbsp;&nbsp;:" +toDate_string);
 						
 						$("#report_header").html("Freezer Efficiency Report");
 						
