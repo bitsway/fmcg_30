@@ -271,7 +271,6 @@ function MM_jumpMenu(targ,selObj,restore){ //v3.0
   </div>
 </div> 
 
-
 <div data-theme="c" data-role="page" id="page_update_client">
   <div data-theme="c" data-role="header" data-position="fixed">
     <a data-role="button" data-rel="back" data-iconpos="left" class="ui-btn-right"><img src="back.png"></a>
@@ -596,7 +595,7 @@ function MM_jumpMenu(targ,selObj,restore){ //v3.0
                   <option value="12">December</option>
                 </select>
             </td>
-            <td>
+            <td >
                 <select name="rpt_day_to" id="rpt_day_to" data-native-menu="false">                  
                   <option value="01">01</option>
                   <option value="02">02</option>
@@ -635,12 +634,14 @@ function MM_jumpMenu(targ,selObj,restore){ //v3.0
               
             </table>
 			  
-            <div style="background-color:#66B3B3; height:2px">&nbsp;</div>
+            <div style="background-color:#66B3B3; height:2px; font-size:12px">&nbsp;</div>
 			<br>
-			
+            
 			<div id="order_report_button"> </div>
             
             <br>
+            <div style="height:1px; font-size:12px">&nbsp;(*Note: Only For Daily Call Report, Month=From Month and Date Range=From Day and To Day, Market not required)</div>
+			<br>
             
             <div align="center"><img id="wait_image_rpt" style="" width="50px;" src="loading.gif" alt=""></div>
         
@@ -794,7 +795,7 @@ function MM_jumpMenu(targ,selObj,restore){ //v3.0
             <br/>
             <br/>
             
-             <a data-role="button" id="btn_outlet_info" onClick="showInfo();" >Info</a>
+             <a data-role="button" id="btn_outlet_info" onClick="showInfo();" >Freezer Info</a>
              <a data-role="button" id="btn_outlet_update" onClick="marketRetailerNextCProfile();" >Outlet Update</a>
              <a data-role="button" id="btn_last_visit" onClick="lastVisit();" >Show Last Voucher</a>
              
@@ -818,7 +819,7 @@ function MM_jumpMenu(targ,selObj,restore){ //v3.0
             <div data-theme="c" data-role="header" data-position="fixed">
 			<a  data-role="button" href="#pageHome" class="ui-btn-left ui-btn-icon-notext" onClick="clear_mgs()"><img src="menu.png"></a>
             <a data-role="button" data-rel="back"  data-iconpos="left" class="ui-btn-right"><img src="back.png"></a>
-                <h3> Info </h3>
+                <h3>Freezer Info</h3>
             </div>
 			
             <div data-role="content" style="margin-top:0px; padding-top:0px;">            	

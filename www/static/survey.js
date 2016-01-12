@@ -432,6 +432,7 @@ function check_user() {
 														reportListStr+='<a data-role="button" onClick="segment_wise_report();" >Segment Wise Report</a>'
 														reportListStr+='<a data-role="button" onClick="sku_wise_report();" >SKU Wise Report</a>'
 														reportListStr+='<a data-role="button" onClick="freezer_efficiency_report();" >Freezer Efficiency Report</a>'
+														reportListStr+='<a data-role="button" onClick="daily_call_report();" >Daily Call Report</a>'
 														localStorage.report_button=reportListStr
 													
 													}
@@ -1491,6 +1492,13 @@ function newClientRegistrationSubmit() {
 							$(".error_new_client_reg").html(resultArray[1]);
 							$("#wait_image_new_registration").hide();		
 							
+							
+							$("#cid").val(localStorage.cid);							
+							$("#user_id").val(localStorage.user_id);
+							$("#user_pass").val(localStorage.user_pass);
+							
+							check_user();
+							
 							//----							
 						}else{						
 							$(".error_new_client_reg").html('Network Timeout. Please try again.');
@@ -1876,6 +1884,14 @@ function profileUpdate(){
 							
 							$(".errorProfileUpdate").html(resultArray[1]);
 							$("#wait_image_profile_update").hide();		
+							
+							//-------
+							
+							$("#cid").val(localStorage.cid);							
+							$("#user_id").val(localStorage.user_id);
+							$("#user_pass").val(localStorage.user_pass);
+							
+							check_user();
 							
 							//----							
 						}else{						
@@ -3374,6 +3390,107 @@ function freezer_efficiency_report() {
 						
 						$("#tbl_rpt_show_details").empty()
 						$("#tbl_rpt_show_details").append(reportStrData).trigger('create');
+						
+						//-----								
+						$("#order_report_button").show();
+						$("#wait_image_rpt").hide();
+						
+						var url = "#page_report_show";
+						$.mobile.navigate(url);	
+
+					}else{						
+						$("#error_rpt").html('Network Timeout, error:1. Please try again.');
+						$("#order_report_button").show();
+						$("#wait_image_rpt").hide();
+						}
+				}
+			  },
+		  error: function(result) {	
+				$("#error_rpt").html('Network Timeout, error:2. Please try again.');		  
+				$("#order_report_button").show();
+				$("#wait_image_rpt").hide();  
+		  }
+	 });//end ajax	
+}
+
+
+function daily_call_report() {
+	$("#error_rpt").html("");
+	$("#order_report_button").hide();
+	$("#wait_image_rpt").show();
+	//---------------------------
+	
+	// Blank all div
+	$("#show_rpt_market").html("");
+	$("#show_rpt_rep").html("");
+	$("#show_rpt_date").html("");
+	
+	//------------------ Get filter value
+	var rpt_market=$("#rpt_market ").val();
+	var rpt_rep=$("#rpt_rep").val();
+	
+	var rpt_month_from=$("#rpt_month_from").val();
+	var rpt_day_from=$("#rpt_day_from").val();
+	
+	var rpt_month_to=$("#rpt_month_to").val();
+	var rpt_day_to=$("#rpt_day_to").val();
+	
+	if (rpt_market==""){
+		rpt_market="All"
+	}
+	if (rpt_rep==""){
+		rpt_rep="All"
+	}
+	
+	var from_month_day=rpt_month_from+'-'+rpt_day_from;
+	var to_month_day=rpt_month_to+'-'+rpt_day_to;
+	
+	//alert(localStorage.base_url+'report_freezer_efficiency_order?cid='+localStorage.cid+'&rep_id='+localStorage.user_id+'&rep_pass='+localStorage.user_pass+'&synccode='+localStorage.synccode+'&user_type='+localStorage.user_type+'&market_id='+rpt_market+'&rep_id_rpt='+rpt_rep+'&from_month_day='+from_month_day+'&to_month_day='+to_month_day);
+	// ajax-------
+	$.ajax({
+		 type: 'POST',
+		 url: localStorage.base_url+'report_daily_call_target_achievement?cid='+localStorage.cid+'&rep_id='+localStorage.user_id+'&rep_pass='+localStorage.user_pass+'&synccode='+localStorage.synccode+'&user_type='+localStorage.user_type+'&market_id='+rpt_market+'&rep_id_rpt='+rpt_rep+'&from_month_day='+from_month_day+'&to_month_day='+to_month_day,
+		 success: function(result) {
+				//alert (result);
+				if (result==''){
+					$("#error_rpt").html('Sorry Network not available');
+					$("#order_report_button").show();
+					$("#wait_image_rpt").hide();
+				}else{					
+					var resultArray = result.split('<SYNCDATA>');			
+					if (resultArray[0]=='FAILED'){						
+						$("#error_rpt").html(resultArray[1]);								
+						$("#order_report_button").show();
+						$("#wait_image_rpt").hide();
+					}else if (resultArray[0]=='SUCCESS'){						
+						var market_string=resultArray[1];
+						var rep_string=resultArray[2];
+						var fromDate_string=resultArray[3];
+						var toDate_string=resultArray[4];
+						var report_string=resultArray[5];
+						
+						//------------------------ Show filter value
+						$("#show_rpt_rep").html("Rep &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:"+rep_string);
+						
+						$("#show_rpt_date").html("Month&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:" +fromDate_string+"</br>DateRange:" +toDate_string);
+						
+						$("#report_header").html("Daily Call Report");
+						
+						//-----------------												
+						/*var dataList=report_string.split('<rd>');
+						var dataListLength=dataList.length;
+						
+						//------------------------
+						//0 str(visitCountH)+'<fd>'+str(orderCount)+'<fd>'+str(target_amount)+'<fd>'+str(orderAmt)+'<fd>'+str(successRatio)
+						var reportStrData='<tr style="font-size:13px;font-weight:bold; text-shadow:none; color:#408080;" ><td >Visit</td><td >Order Count</td><td >Target</td><td >Achievement</td><td >Success Ratio</td></tr>'
+						for (i=0; i < dataListLength; i++){
+							var dataDetailList=dataList[i].split('<fd>');
+							
+							reportStrData+='<tr style="font-size:11px;border-color:#4E9A9A;"><td style="border-color:#4E9A9A;">'+dataDetailList[0]+'</td><td style="border-color:#4E9A9A;">'+dataDetailList[1]+'</td><td style="border-color:#4E9A9A;">'+dataDetailList[2]+'</td><td style="border-color:#4E9A9A;">'+dataDetailList[3]+'</td><td style="border-color:#4E9A9A;">'+dataDetailList[4]+'%</td></tr>'
+							}*/
+						
+						$("#tbl_rpt_show_details").empty()
+						$("#tbl_rpt_show_details").append(report_string).trigger('create');
 						
 						//-----								
 						$("#order_report_button").show();
