@@ -209,7 +209,7 @@ function check_user() {
 	
 	var base_url='';
 	var photo_url='';
-	
+		
 		localStorage.base_url='';
 		localStorage.photo_url='';
 		localStorage.photo_submit_url='';
@@ -219,7 +219,7 @@ function check_user() {
 		localStorage.product_tbl_cart='';
 		localStorage.marchandizingItem='';
 		localStorage.distributorListStr='';	
-
+		
 		localStorage.client_string=''	
 		localStorage.visit_client=''
 		
@@ -1233,6 +1233,7 @@ function newClientRegistration() {
 	var url = "#page_new_client";
 	$.mobile.navigate(url);
 }
+
 function newClientRegistrationSubmit() {
 	$(".error_new_client_reg").html('');
 	
@@ -1492,7 +1493,6 @@ function newClientRegistrationSubmit() {
 							$(".error_new_client_reg").html(resultArray[1]);
 							$("#wait_image_new_registration").hide();		
 							
-							
 							$("#cid").val(localStorage.cid);							
 							$("#user_id").val(localStorage.user_id);
 							$("#user_pass").val(localStorage.user_pass);
@@ -1516,9 +1516,7 @@ function newClientRegistrationSubmit() {
 	}
 }
 
-
 //--------------------------------- Client Profile: Client list by market id
-
 function marketRetailerNextCProfile() {
 	$("#myerror").html("");
 	$("#wait_image_visit_submit").hide();
@@ -2949,7 +2947,7 @@ function order_detail_report() {
 						$("#report_header").html('Order Details Report');
 						
 						//-----------------												
-						var dataList=report_string.split('<rd>');
+						/*var dataList=report_string.split('<rd>');
 						var dataListLength=dataList.length;
 						
 						//------------------------
@@ -2959,10 +2957,10 @@ function order_detail_report() {
 							var dataDetailList=dataList[i].split('<fd>');
 							
 							reportStrData+='<tr style="font-size:11px;border-color:#4E9A9A;"><td style="border-color:#4E9A9A;"><b>'+dataDetailList[0]+'</b></td><td style="border-color:#4E9A9A;">'+dataDetailList[1]+'</td><td style="border-color:#4E9A9A;">'+dataDetailList[2]+'</td><td style="border-color:#4E9A9A;">'+dataDetailList[3]+'</td><td style="border-color:#4E9A9A;">'+dataDetailList[4]+'</td><td style="border-color:#4E9A9A;text-align:right">'+dataDetailList[5]+'</td><td style="border-color:#4E9A9A;">'+dataDetailList[6]+'</td><td style="border-color:#4E9A9A;">'+dataDetailList[8]+'</td><td style="border-color:#4E9A9A;">'+dataDetailList[7]+'</td><td style="border-color:#4E9A9A;">'+dataDetailList[9]+'</td></tr>'
-							}
+							}*/
 						
 						$("#tbl_rpt_show_details").empty()
-						$("#tbl_rpt_show_details").append(reportStrData).trigger('create');
+						$("#tbl_rpt_show_details").append(report_string).trigger('create');
 						
 						//-----								
 						$("#order_report_button").show();
@@ -3056,20 +3054,19 @@ function order_summary_report() {
 						$("#report_header").html("Order Summary Report");
 						
 						//-----------------												
-						var dataList=report_string.split('<rd>');
+						/*var dataList=report_string.split('<rd>');
 						var dataListLength=dataList.length;
 						
 						//------------------------
 						//0 str(recNo)+'<fd>1'+str(order_date)+'<fd>2'+str(visitCountH)+'<fd>3'+str(orderCount)+'<fd>4'+str(orderAmt)
 						var reportStrData='<tr style="font-size:13px;font-weight:bold; text-shadow:none; color:#408080;" ><td >SL</td><td >Date</td><td >Visit</td><td>Total Order Count</td><td style="text-align:right">Amount</tr>'
 						for (i=0; i < dataListLength; i++){
-							var dataDetailList=dataList[i].split('<fd>');
-							
+							var dataDetailList=dataList[i].split('<fd>');							
 							reportStrData+='<tr style="font-size:11px;border-color:#4E9A9A;"><td style="border-color:#4E9A9A;"><b>'+dataDetailList[0]+'</b></td><td style="border-color:#4E9A9A;">'+dataDetailList[1]+'</td><td style="border-color:#4E9A9A;">'+dataDetailList[2]+'</td><td style="border-color:#4E9A9A;">'+dataDetailList[3]+'</td><td style="border-color:#4E9A9A;text-align:right">'+dataDetailList[4]+'</td></tr>'
-							}
+							}*/
 						
 						$("#tbl_rpt_show_details").empty()
-						$("#tbl_rpt_show_details").append(reportStrData).trigger('create');
+						$("#tbl_rpt_show_details").append(report_string).trigger('create');
 						
 						//-----								
 						$("#order_report_button").show();
@@ -3162,7 +3159,7 @@ function segment_wise_report() {
 						$("#report_header").html("Segment Wise Report");
 						
 						//-----------------												
-						var dataList=report_string.split('<rd>');
+						/*var dataList=report_string.split('<rd>');
 						var dataListLength=dataList.length;
 						
 						//------------------------
@@ -3172,10 +3169,10 @@ function segment_wise_report() {
 							var dataDetailList=dataList[i].split('<fd>');
 							
 							reportStrData+='<tr style="font-size:11px;border-color:#4E9A9A;"><td style="border-color:#4E9A9A;"><b>'+dataDetailList[0]+'</b></td><td style="border-color:#4E9A9A;">'+dataDetailList[1]+'</td><td style="border-color:#4E9A9A;">'+dataDetailList[2]+'</td><td style="border-color:#4E9A9A;">'+dataDetailList[3]+'</td><td style="border-color:#4E9A9A;">'+dataDetailList[4]+'</td><td style="border-color:#4E9A9A;text-align:right">'+dataDetailList[5]+'</td><td style="border-color:#4E9A9A;">'+dataDetailList[6]+'</td><td style="border-color:#4E9A9A;">'+dataDetailList[7]+'</td><td style="border-color:#4E9A9A;">'+dataDetailList[8]+'</td></tr>'
-							}
+							}*/
 						
 						$("#tbl_rpt_show_details").empty()
-						$("#tbl_rpt_show_details").append(reportStrData).trigger('create');
+						$("#tbl_rpt_show_details").append(report_string).trigger('create');
 						
 						//-----								
 						$("#order_report_button").show();
@@ -3270,7 +3267,7 @@ function sku_wise_report() {
 						$("#report_header").html("SKU Wise Report");
 						
 						//-----------------												
-						var dataList=report_string.split('<rd>');
+						/*var dataList=report_string.split('<rd>');
 						var dataListLength=dataList.length;
 						
 						//------------------------
@@ -3280,10 +3277,10 @@ function sku_wise_report() {
 							var dataDetailList=dataList[i].split('<fd>');
 							
 							reportStrData+='<tr style="font-size:11px;border-color:#4E9A9A;"><td style="border-color:#4E9A9A;"><b>'+dataDetailList[0]+'</b></td><td style="border-color:#4E9A9A;">'+dataDetailList[1]+'</td><td style="border-color:#4E9A9A;">'+dataDetailList[2]+'</td><td style="border-color:#4E9A9A;">'+dataDetailList[3]+'</td><td style="border-color:#4E9A9A;">'+dataDetailList[4]+'</td><td style="border-color:#4E9A9A;text-align:right">'+dataDetailList[5]+'</td><td style="border-color:#4E9A9A;">'+dataDetailList[6]+'</td><td style="border-color:#4E9A9A;">'+dataDetailList[7]+'</td><td style="border-color:#4E9A9A;">'+dataDetailList[8]+'</td></tr>'
-							}
+							}*/
 						
 						$("#tbl_rpt_show_details").empty()
-						$("#tbl_rpt_show_details").append(reportStrData).trigger('create');
+						$("#tbl_rpt_show_details").append(report_string).trigger('create');
 						
 						//-----								
 						$("#order_report_button").show();
@@ -3376,20 +3373,19 @@ function freezer_efficiency_report() {
 						$("#report_header").html("Freezer Efficiency Report");
 						
 						//-----------------												
-						var dataList=report_string.split('<rd>');
+						/*var dataList=report_string.split('<rd>');
 						var dataListLength=dataList.length;
 						
 						//------------------------
 						//0 str(asmName)+'<fd>1'+str(tseName)+'<fd>2'+str(repName)+'<fd>3'+str(depotName)+'<fd>4'+str(retailerCount)+'<fd>5'+str(freezerCount)+'<fd>6'+str(totalAmt)+'<fd>7'+str(salesPerFreezer)
 						var reportStrData='<tr style="font-size:13px;font-weight:bold; text-shadow:none; color:#408080;" ><td >ASM</td><td >TSE</td><td >SR</td><td>DB Name</td><td>No. of Retailer</td><td >No. of Freezer</td><td>Sales Till Date</td><td>Sales/ Freezer</td></tr>'
 						for (i=0; i < dataListLength; i++){
-							var dataDetailList=dataList[i].split('<fd>');
-							
+							var dataDetailList=dataList[i].split('<fd>');							
 							reportStrData+='<tr style="font-size:11px;border-color:#4E9A9A;"><td style="border-color:#4E9A9A;">'+dataDetailList[0]+'</td><td style="border-color:#4E9A9A;">'+dataDetailList[1]+'</td><td style="border-color:#4E9A9A;">'+dataDetailList[2]+'</td><td style="border-color:#4E9A9A;">'+dataDetailList[3]+'</td><td style="border-color:#4E9A9A;">'+dataDetailList[4]+'</td><td style="border-color:#4E9A9A">'+dataDetailList[5]+'</td><td style="border-color:#4E9A9A;text-align:right">'+dataDetailList[6]+'</td><td style="border-color:#4E9A9A;text-align:right">'+dataDetailList[7]+'</td></tr>'
-							}
+							}*/
 						
 						$("#tbl_rpt_show_details").empty()
-						$("#tbl_rpt_show_details").append(reportStrData).trigger('create');
+						$("#tbl_rpt_show_details").append(report_string).trigger('create');
 						
 						//-----								
 						$("#order_report_button").show();
@@ -3445,7 +3441,7 @@ function daily_call_report() {
 	var from_month_day=rpt_month_from+'-'+rpt_day_from;
 	var to_month_day=rpt_month_to+'-'+rpt_day_to;
 	
-	//alert(localStorage.base_url+'report_freezer_efficiency_order?cid='+localStorage.cid+'&rep_id='+localStorage.user_id+'&rep_pass='+localStorage.user_pass+'&synccode='+localStorage.synccode+'&user_type='+localStorage.user_type+'&market_id='+rpt_market+'&rep_id_rpt='+rpt_rep+'&from_month_day='+from_month_day+'&to_month_day='+to_month_day);
+	//alert(localStorage.base_url+'report_daily_call_target_achievement?cid='+localStorage.cid+'&rep_id='+localStorage.user_id+'&rep_pass='+localStorage.user_pass+'&synccode='+localStorage.synccode+'&user_type='+localStorage.user_type+'&market_id='+rpt_market+'&rep_id_rpt='+rpt_rep+'&from_month_day='+from_month_day+'&to_month_day='+to_month_day);
 	// ajax-------
 	$.ajax({
 		 type: 'POST',
